@@ -1,43 +1,41 @@
 // Cria função de tocar o som
-function tocaSom(seletorAudio){
+function tocaSom(seletorAudio) {
+    // Seleciona o elemento de áudio pelo seletor fornecido
     const elemento = document.querySelector(seletorAudio);
-    // Verifica se o elemento realmente existe
-    if (elemento && elemento.localName === 'audio'){
-        elemento.play();
-    }
-    else{
-        console.log('Elemento invalido');
-    }
     
+    // Verifica se o elemento realmente existe e se é um elemento de áudio
+    if (elemento && elemento.localName === 'audio') {
+        elemento.play(); // Toca o áudio
+    } else {
+        console.log('Elemento inválido'); // Mensagem de erro
+    }
 }
 
-// Atribui o listaDeTeclas a todos os items com o valor .tecla
+// Atribui a listaDeTeclas a todos os elementos com a classe .tecla
 const listaDeTeclas = document.querySelectorAll('.tecla');
 
-// Usa o for para percorrer a lista de items
+// Usa um loop para percorrer a lista de teclas
 for (let contador = 0; contador < listaDeTeclas.length; contador++) {
-
-    // Definindo variaveis
+    // Define variáveis para a tecla atual
     const tecla = listaDeTeclas[contador];
-    const instrumento = tecla.classList[1];
-    const idAudio = `#som_${instrumento}`;
+    const instrumento = tecla.classList[1]; // Captura o nome do instrumento
+    const idAudio = `#som_${instrumento}`; // Monta o seletor de áudio correspondente
 
-    // Função para reproduzir o audio no click
-    tecla.onclick = function(){
-        tocaSom(idAudio)
+    // Função para reproduzir o áudio ao clicar na tecla
+    tecla.onclick = function() {
+        tocaSom(idAudio);
     }
 
-    // Função para quando a tecla for pressiona
-    tecla.onkeydown = function (evento){
-        if (evento.code == 'Space' || evento.code == 'Enter'){
-            // Adiciona a classe do css 'ativa'
-            tecla.classList.add('ativa');
+    // Função para quando a tecla é pressionada
+    tecla.onkeydown = function(evento) {
+        // Verifica se a tecla pressionada é 'Space' ou 'Enter'
+        if (evento.code == 'Space' || evento.code == 'Enter') {
+            tecla.classList.add('ativa'); // Adiciona a classe 'ativa' para estilo
         }
     }
 
-    // Função para quando a tecla for solta
-    tecla.onkeyup = function(){
-        // Remove a classe do css 'ativa'
-        tecla.classList.remove('ativa');
+    // Função para quando a tecla é solta
+    tecla.onkeyup = function() {
+        tecla.classList.remove('ativa'); // Remove a classe 'ativa'
     }
 }
